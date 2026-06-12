@@ -58,13 +58,13 @@ watch(() => props.visible, (v) => {
             <button
               class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center
                      rounded-full text-pink-300 hover:text-pink-500 hover:bg-pink-50
-                     transition-colors text-lg leading-none"
+                     transition-colors text-lg 2xl:text-xl leading-none"
               @click="emit('close')"
             >✕</button>
 
             <!-- 头部 -->
             <div class="px-6 pt-6 pb-4 border-b border-pink-100">
-              <h3 class="font-bold text-lg text-pink-800 mb-2">{{ plugin.name }}</h3>
+              <h3 class="font-bold text-lg 2xl:text-xl text-pink-800 mb-2">{{ plugin.name }}</h3>
               <div class="flex items-center gap-1.5">
                 <span
                   class="text-xs px-2 py-0.5 rounded-full font-medium"
@@ -86,19 +86,19 @@ watch(() => props.visible, (v) => {
             <!-- 内容 -->
             <div class="px-6 py-4 space-y-5">
               <div>
-                <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-1.5">描述</p>
-                <p class="text-sm text-pink-700 leading-relaxed">
+                <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-1.5">描述</p>
+                <p class="text-sm 2xl:text-base text-pink-700 leading-relaxed">
                   {{ plugin.description }}
                 </p>
               </div>
 
               <div v-if="plugin.tips && plugin.tips.length">
-                <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-1.5">使用提示</p>
+                <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-1.5">使用提示</p>
                 <ul class="space-y-1">
                   <li
                     v-for="(tip, i) in plugin.tips"
                     :key="i"
-                    class="text-sm text-pink-600 flex items-start gap-1.5"
+                    class="text-sm 2xl:text-base text-pink-600 flex items-start gap-1.5"
                   >
                     <span class="text-pink-300 mt-1 shrink-0">▸</span>
                     <span>{{ tip }}</span>
@@ -108,20 +108,20 @@ watch(() => props.visible, (v) => {
 
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-0.5">版本</p>
-                  <p class="text-sm text-pink-700">v{{ plugin.version }}</p>
+                  <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-0.5">版本</p>
+                  <p class="text-sm 2xl:text-base text-pink-700">v{{ plugin.version }}</p>
                 </div>
                 <div>
-                  <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-0.5">作者</p>
-                  <p class="text-sm text-pink-700">{{ plugin.author }}</p>
+                  <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-0.5">作者</p>
+                  <p class="text-sm 2xl:text-base text-pink-700">{{ plugin.author }}</p>
                 </div>
                 <div>
-                  <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-0.5">所属模块</p>
-                  <p class="text-sm text-pink-700">{{ plugin.module_id }}</p>
+                  <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-0.5">所属模块</p>
+                  <p class="text-sm 2xl:text-base text-pink-700">{{ plugin.module_id }}</p>
                 </div>
                 <div>
-                  <p class="text-xs font-medium text-pink-400 uppercase tracking-wider mb-0.5">插件ID</p>
-                  <p class="text-sm text-pink-400 font-mono break-all">{{ plugin.full_id }}</p>
+                  <p class="text-xs 2xl:text-sm font-medium text-pink-500 bg-pink-50 rounded-lg px-2 py-0.5 inline-block mb-0.5">插件ID</p>
+                  <p class="text-sm 2xl:text-base text-pink-400 font-mono break-all">{{ plugin.full_id }}</p>
                 </div>
               </div>
             </div>

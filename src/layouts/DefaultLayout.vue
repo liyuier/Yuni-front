@@ -28,9 +28,13 @@ const navItems = [
           :key="item.path"
           :to="item.path"
           class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all"
-          :class="route.path === item.path
-            ? 'bg-pink-100 text-pink-700 font-medium shadow-sm'
-            : 'text-pink-600 hover:bg-pink-50'"
+          :class="item.path === '/'
+            ? route.path === '/'
+              ? 'bg-pink-100 text-pink-700 font-medium shadow-sm'
+              : 'text-pink-600 hover:bg-pink-50'
+            : route.path.startsWith(item.path)
+              ? 'bg-pink-100 text-pink-700 font-medium shadow-sm'
+              : 'text-pink-600 hover:bg-pink-50'"
         >
           <span>{{ item.icon }}</span>
           <span>{{ item.label }}</span>
