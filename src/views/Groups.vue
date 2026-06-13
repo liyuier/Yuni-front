@@ -3,6 +3,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { getGroupList, getGroupMessages, getGroupPluginStatus } from '../api/groups'
 import { enablePlugin, disablePlugin } from '../api/plugin'
 import MessageBubble from '../components/MessageBubble.vue'
+import ImageViewer from '../components/ImageViewer.vue'
 
 const groups = ref([])
 const messages = ref([])
@@ -42,6 +43,14 @@ onMounted(async () => {
 let loadSeq = 0
 // 首页加载完成前禁止 loadMore，避免 scrollToBottom 触发误翻页
 let initDone = false
+
+// 图片查看器
+const viewerSrc = ref('')
+const viewerVisible = ref(false)
+function openViewer(src) {
+  viewerSrc.value = src
+  viewerVisible.value = true
+}
 
 async function selectGroup(group) {
   initDone = false
@@ -296,6 +305,7 @@ const typeColor = {
                     :segments="msg.segments"
                     :plain-text="msg.plain_text"
                     :message="msg.message"
+                    @img-click="openViewer"
                   />
                 </div>
               </div>
@@ -318,6 +328,7 @@ const typeColor = {
                     :segments="msg.segments"
                     :plain-text="msg.plain_text"
                     :message="msg.message"
+                    @img-click="openViewer"
                   />
                 </div>
               </div>
@@ -406,6 +417,13 @@ const typeColor = {
       </div>
     </div>
   </div>
+
+  <!-- 图片查看器 -->
+  <ImageViewer
+    :src="viewerSrc"
+    :visible="viewerVisible"
+    @close="viewerVisible = false"
+  />
 </template>
 
 <style scoped>

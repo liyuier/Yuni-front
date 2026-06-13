@@ -5,6 +5,8 @@ defineProps({
   message: { type: String, default: '' },
 })
 
+defineEmits(['imgClick'])
+
 /**
  * OneBot / Yuni 消息段 → 展示文本。
  * 字段选择参考 Stapxs-QQ-Lite-2.0 MsgBody.vue 的渲染逻辑。
@@ -24,8 +26,14 @@ function segText(seg) {
       // 普通图片 → 由模板 img 标签渲染
       return ''
     // ---------- QQ 表情 ----------
-    case 'face':
-      return '[表情#' + (d.id || '?') + ']'
+    case 'face': {
+      const id = Number(d.id)
+      if (id >= 5000) {
+        try { return String.fromCodePoint(id) } catch { return '[表情#' + id + ']' }
+      }
+      // id < 5000 → APNG 图片由模板 img 渲染
+      return ''
+    }
     // ---------- 商城表情 ----------
     case 'mface':
       return '[商城表情]'
@@ -96,12 +104,24 @@ function isImageSeg(seg) {
   return !!d.url
 }
 
+/** QQ 表情 APNG URL（与 Stapxs 同源 CDN） */
+function faceImgUrl(id) {
+  return `https://lib.stapxs.cn/download/stapxs-qq-lite/qq_emoji/${id}/apng/${id}.png`
+}
+
 /** 获取图片 URL */
 function imgUrl(seg) {
   return (seg.data || {}).url || ''
 }
 
 /** 图片是否为表情子类型（subType=1 热图, 7 表情） */
+/** QQ 表情是否可渲染为 APNG 图片（id < 5000） */
+function isQqFace(seg) {
+  if (seg.type !== 'face') return false
+  const id = Number((seg.data || {}).id)
+  return !isNaN(id) && id < 5000
+}
+
 function isFaceImage(seg) {
   const d = seg.data || {}
   const st = d.subType ?? d.sub_type
@@ -129,11 +149,20 @@ function formatFileSize(bytes) {
         v-if="isImageSeg(seg)"
         :src="imgUrl(seg)"
         :class="[
-          'max-w-48 max-h-48 rounded-lg',
+          'max-w-48 max-h-48 rounded-lg cursor-pointer hover:opacity-90 transition-opacity',
           isFaceImage(seg) ? 'max-h-28' : ''
         ]"
         :alt="(seg.data || {}).summary || '图片'"
         referrerpolicy="no-referrer"
+        loading="lazy"
+        @click="$emit('imgClick', imgUrl(seg))"
+      />
+      <!-- QQ 表情（小黄脸 APNG） -->
+      <img
+        v-else-if="isQqFace(seg)"
+        :src="faceImgUrl((seg.data || {}).id)"
+        class="w-6 h-6 inline-block align-middle"
+        :alt="'表情#' + (seg.data || {}).id"
         loading="lazy"
       />
       <!-- 文本段 -->
