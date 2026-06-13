@@ -4,6 +4,7 @@ import { getGroupList, getGroupMessages, getGroupPluginStatus } from '../api/gro
 import { enablePlugin, disablePlugin } from '../api/plugin'
 import MessageBubble from '../components/MessageBubble.vue'
 import ImageViewer from '../components/ImageViewer.vue'
+import { connectChatWs, subscribeGroup, disconnectChatWs } from '../api/ws'
 
 const groups = ref([])
 const messages = ref([])
@@ -35,7 +36,11 @@ const filteredGroups = computed(() => {
 
 const enabledCount = computed(() => plugins.value.filter(p => p.enabled).length)
 
+// 当前群组 WS 取消订阅函数
+let wsUnsub = null
+
 onMounted(async () => {
+  connectChatWs()
   try { groups.value = await getGroupList() } catch (e) { groups.value = [] }
   if (groups.value.length) selectGroup(groups.value[0])
 })
@@ -54,6 +59,13 @@ function openViewer(src) {
 
 async function selectGroup(group) {
   initDone = false
+  // 切换 WS 订阅
+  if (wsUnsub) wsUnsub()
+  wsUnsub = subscribeGroup(group.group_id, (msg) => {
+    messages.value = [...messages.value, msg]
+    nextTick(() => scrollToBottom())
+  })
+
   activeGroup.value = group
   messages.value = []
   msgPage.value = 1
