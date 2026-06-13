@@ -17,7 +17,15 @@ const routes = [
         ],
       },
       { path: 'groups', name: 'groups', component: () => import('../views/Groups.vue'), meta: { title: '群组管理' } },
-      { path: 'database', name: 'database', component: () => import('../views/Logs.vue'), meta: { title: '数据库' } },
+      {
+        path: 'database',
+        component: () => import('../views/Database.vue'),
+        redirect: '/database/sqlite',
+        children: [
+          { path: 'sqlite', name: 'database-sqlite', component: () => import('../views/logs/DatabaseView.vue'), meta: { title: 'SQLite' } },
+          { path: 'redis', name: 'database-redis', component: () => import('../views/logs/RedisView.vue'), meta: { title: 'Redis' } },
+        ],
+      },
       { path: 'settings', name: 'settings', component: () => import('../views/Settings.vue'), meta: { title: '系统设置' } },
     ]
   }

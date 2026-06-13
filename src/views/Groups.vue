@@ -183,6 +183,7 @@ const typeColor = {
 
 <template>
   <div class="flex-1 min-h-0 flex flex-col">
+    <h2 class="text-xl 2xl:text-2xl font-bold text-pink-800 mb-4 shrink-0">🐧 群组管理</h2>
     <div class="flex gap-0 w-full flex-1 relative rounded-2xl overflow-hidden"
          style="background: rgba(255,255,255,0.6); border: 1px solid rgba(248,165,182,0.3);">
 

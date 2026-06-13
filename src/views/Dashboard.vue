@@ -126,27 +126,46 @@ function diskPercent() {
       </div>
     </div>
 
-    <!-- 装饰卡片 -->
-    <div
-      class="yuni-card relative overflow-hidden"
-      style="min-height: 180px;"
-    >
+    <!-- 关于 Yuni -->
+    <div class="yuni-card relative overflow-hidden">
       <div
-        class="absolute inset-0 opacity-20"
+        class="absolute inset-0 opacity-10"
         style="background:
-          radial-gradient(ellipse at 20% 50%, #f8bbd0 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 30%, #f48fb1 0%, transparent 40%),
-          radial-gradient(ellipse at 50% 80%, #fce4ec 0%, transparent 50%);"
+          radial-gradient(ellipse at 10% 30%, #f8bbd0 0%, transparent 60%),
+          radial-gradient(ellipse at 90% 70%, #f48fb1 0%, transparent 50%);"
       ></div>
-      <div class="relative flex items-center justify-center h-full py-10">
-        <div class="text-center">
-          <div class="text-5xl mb-3">🌸</div>
-          <p class="text-pink-500 font-medium text-lg 2xl:text-xl">
-            {{ botStatus?.nickname || 'Yuni' }} 运行中
-          </p>
-          <p class="text-pink-300 text-sm 2xl:text-base mt-1">
-            今天也是美好的一天 ✨
-          </p>
+      <div class="relative">
+        <h3 class="text-sm 2xl:text-base font-medium text-pink-500 mb-4 uppercase tracking-wider">🌸 关于 Yuni</h3>
+        <p class="text-sm 2xl:text-base text-pink-700 leading-relaxed mb-5">
+          Yuni 是一个基于 Spring Boot 的跨平台 QQ 聊天机器人框架，
+          支持插件热加载与卸载，拥有强大的命令解析与事件分发系统。
+          她温柔、可爱，是你群聊里最贴心的小助手 ✨
+        </p>
+        <div class="grid grid-cols-2 gap-3 text-sm 2xl:text-base">
+          <a href="https://github.com/liyuier/Yuni3" target="_blank"
+            class="flex items-center gap-2 px-3 py-2 rounded-xl bg-pink-50/80
+                   text-pink-600 hover:bg-pink-100 hover:text-pink-700 transition-colors">
+            <span class="text-lg">📦</span>
+            <span>Yuni3 后端</span>
+          </a>
+          <a href="https://github.com/liyuier/Yuni3-plugin-repo" target="_blank"
+            class="flex items-center gap-2 px-3 py-2 rounded-xl bg-pink-50/80
+                   text-pink-600 hover:bg-pink-100 hover:text-pink-700 transition-colors">
+            <span class="text-lg">🧩</span>
+            <span>插件仓库</span>
+          </a>
+          <a href="https://github.com/liyuier/Yuni-front" target="_blank"
+            class="flex items-center gap-2 px-3 py-2 rounded-xl bg-pink-50/80
+                   text-pink-600 hover:bg-pink-100 hover:text-pink-700 transition-colors">
+            <span class="text-lg">🎨</span>
+            <span>Yuni 前端</span>
+          </a>
+          <a href="https://yuni.yuier.com" target="_blank"
+            class="flex items-center gap-2 px-3 py-2 rounded-xl bg-pink-50/80
+                   text-pink-600 hover:bg-pink-100 hover:text-pink-700 transition-colors">
+            <span class="text-lg">📖</span>
+            <span>使用文档</span>
+          </a>
         </div>
       </div>
     </div>

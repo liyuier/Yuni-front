@@ -77,29 +77,30 @@ function closeDetail() {
 </script>
 
 <template>
-  <div>
-    <!-- 搜索框 -->
-    <div class="relative mb-5 w-56">
-      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-pink-300">🔍</span>
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="搜索模块名或插件名..."
-        class="pl-9 pr-4 py-1.5 text-sm 2xl:text-base rounded-xl border border-pink-200
-               bg-white/80 text-pink-700 placeholder-pink-300 w-full
-               focus:outline-none focus:border-pink-400 focus:bg-white transition-colors"
-      />
+  <div class="flex flex-col min-h-0 h-full">
+    <!-- 搜索 + 统计 -->
+    <div class="shrink-0 mb-5">
+      <div class="relative w-56">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-pink-300">🔍</span>
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="搜索模块名或插件名..."
+          class="pl-9 pr-4 py-1.5 text-sm 2xl:text-base rounded-xl border border-pink-200
+                 bg-white/80 text-pink-700 placeholder-pink-300 w-full
+                 focus:outline-none focus:border-pink-400 focus:bg-white transition-colors"
+        />
+      </div>
+      <div
+        v-if="!loading && !error && totalPlugins"
+        class="flex items-center gap-4 mt-3 text-xs 2xl:text-sm text-pink-400"
+      >
+        <span>📦 {{ filteredModules.length }} 个模块</span>
+        <span>🧩 {{ totalPlugins }} 个插件</span>
+      </div>
     </div>
 
-    <!-- 统计条 -->
-    <div
-      v-if="!loading && !error && totalPlugins"
-      class="flex items-center gap-4 mb-5 text-xs 2xl:text-sm text-pink-400"
-    >
-      <span>📦 {{ filteredModules.length }} 个模块</span>
-      <span>🧩 {{ totalPlugins }} 个插件</span>
-    </div>
-
+    <div class="flex-1 overflow-y-auto min-h-0 -mx-3 px-3">
     <!-- 加载态 -->
     <div v-if="loading" class="yuni-card">
       <div class="flex items-center gap-3 text-pink-400 py-4">
@@ -203,6 +204,8 @@ function closeDetail() {
         </button>
       </div>
     </div>
+    </div>
+    <!-- /滚动容器 -->
 
     <PluginDetailModal
       :plugin="detailPlugin"
