@@ -49,7 +49,7 @@ const navItems = [
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-8 flex flex-col overflow-y-auto" style="height: 100vh;">
       <router-view />
     </main>
   </div>
