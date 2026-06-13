@@ -17,7 +17,7 @@ const routes = [
         ],
       },
       { path: 'groups', name: 'groups', component: () => import('../views/Groups.vue'), meta: { title: '群组管理' } },
-      { path: 'logs', name: 'logs', component: () => import('../views/Logs.vue'), meta: { title: '运行日志' } },
+      { path: 'database', name: 'database', component: () => import('../views/Logs.vue'), meta: { title: '数据库' } },
       { path: 'settings', name: 'settings', component: () => import('../views/Settings.vue'), meta: { title: '系统设置' } },
     ]
   }

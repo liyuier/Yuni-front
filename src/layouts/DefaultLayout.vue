@@ -9,7 +9,7 @@ const navItems = [
   { path: '/', label: '首页', icon: '🌸' },
   { path: '/plugins', label: '插件管理', icon: '🧩' },
   { path: '/groups', label: '群组管理', icon: '🐧' },
-  { path: '/logs', label: '运行日志', icon: '📋' },
+  { path: '/database', label: '数据库', icon: '📊' },
   { path: '/settings', label: '系统设置', icon: '⚙' },
 ]
 </script>
