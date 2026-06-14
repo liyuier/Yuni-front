@@ -22,8 +22,8 @@ const routes = [
         component: () => import('../views/Database.vue'),
         redirect: '/database/sqlite',
         children: [
-          { path: 'sqlite', name: 'database-sqlite', component: () => import('../views/logs/DatabaseView.vue'), meta: { title: 'SQLite' } },
-          { path: 'redis', name: 'database-redis', component: () => import('../views/logs/RedisView.vue'), meta: { title: 'Redis' } },
+          { path: 'sqlite', name: 'database-sqlite', component: () => import('../views/database/DatabaseView.vue'), meta: { title: 'SQLite' } },
+          { path: 'redis', name: 'database-redis', component: () => import('../views/database/RedisView.vue'), meta: { title: 'Redis' } },
         ],
       },
       { path: 'settings', name: 'settings', component: () => import('../views/Settings.vue'), meta: { title: '系统设置' } },
