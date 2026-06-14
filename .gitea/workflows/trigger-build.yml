@@ -1,0 +1,16 @@
+name: Trigger Yuni3 Build
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Yuni3 workflow
+        run: |
+          curl -X POST http://192.168.0.103:3000/api/v1/repos/yuier/Yuni3/actions/workflows/deploy.yml/dispatches \
+            -H "Authorization: token ${{ secrets.YUNI3_GITEA_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref": "master"}'
